@@ -286,7 +286,7 @@ export default function MainWeather({ setFullCityName }) {
                 className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-white uppercase bg-green-600 hover:bg-green-700 rounded-xl shadow-md transition-all"
                 onClick={handleAddFavorite}
               >
-                + Favoris
+                + Favoriss
               </button>
             ) : (
               <button
@@ -295,7 +295,7 @@ export default function MainWeather({ setFullCityName }) {
                 disabled
                 title="Connectez-vous pour ajouter aux favoris"
               >
-                + Favoris
+                + Favoriss
               </button>
             )}
           </div>
