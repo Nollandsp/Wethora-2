@@ -109,7 +109,8 @@ export default function MainWeather({ setFullCityName }) {
           data.forEach((commune) => {
             const suggestion = document.createElement("div");
             suggestion.textContent = `${commune.nom} (${commune.departement.nom})`;
-            suggestion.className = "cursor-pointer px-4 py-2 hover:bg-gray-100";
+            suggestion.className =
+              "cursor-pointer px-4 py-2 hover:bg-gray-100 text-gray-900";
             suggestion.addEventListener("click", () => {
               input.value = commune.nom;
               suggestionsContainer.innerHTML = "";
@@ -253,25 +254,28 @@ export default function MainWeather({ setFullCityName }) {
         <form
           id="search-form"
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row justify-center w-full max-w-full sm:max-w-md lg:max-w-lg gap-2 sm:gap-2 mb-8 mt-10 px-2 relative"
+          className="flex flex-col sm:flex-row justify-center w-full max-w-full sm:max-w-md lg:max-w-lg gap-2 mb-8 mt-10 px-2 relative"
         >
           <input
             type="search"
             ref={inputRef}
             placeholder="Rechercher une ville..."
-            className="w-full sm:flex-1 px-4 py-1 sm:px-5 sm:py-1 text-base border border-blue-200 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-400 transition-all"
+            className="w-full sm:flex-1 px-4 py-2 text-base border border-blue-300 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-400 transition-all"
             autoComplete="off"
+            aria-label="Recherche de ville"
           />
           <div
             id="suggestions-container"
             ref={suggestionsRef}
-            className="absolute z-50 top-full left-0 w-[90%] sm:w-[30%] max-h-[200px] overflow-y-auto bg-white rounded-md shadow-lg"
+            className="absolute z-50 top-full left-0 w-[90%] sm:w-[30%] max-h-52 overflow-y-auto bg-white rounded-md shadow-lg"
+            role="listbox"
+            aria-label="Suggestions de villes"
           ></div>
 
           <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto">
             <button
               type="submit"
-              className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-semibold text-white uppercase bg-blue-500 hover:bg-blue-600 rounded-xl shadow-md transition-all"
+              className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-white uppercase bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md transition-all"
             >
               Rechercher
             </button>
@@ -279,7 +283,7 @@ export default function MainWeather({ setFullCityName }) {
             {user ? (
               <button
                 type="button"
-                className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-semibold text-white uppercase bg-green-500 hover:bg-green-600 rounded-xl shadow-md transition-all"
+                className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-white uppercase bg-green-600 hover:bg-green-700 rounded-xl shadow-md transition-all"
                 onClick={handleAddFavorite}
               >
                 + Favoris
@@ -287,11 +291,11 @@ export default function MainWeather({ setFullCityName }) {
             ) : (
               <button
                 type="button"
-                className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-semibold text-white uppercase bg-gray-300 cursor-not-allowed rounded-xl shadow-md"
+                className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-white uppercase bg-gray-300 cursor-not-allowed rounded-xl shadow-md"
                 disabled
                 title="Connectez-vous pour ajouter aux favoris"
               >
-                + Favoriss
+                + Favoris
               </button>
             )}
           </div>
@@ -302,7 +306,7 @@ export default function MainWeather({ setFullCityName }) {
             {favorites.map((city) => (
               <button
                 key={city}
-                className="px-5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-semibold shadow-lg hover:shadow-xl hover:bg-white/30 transition-all border border-white/30 hover:border-white/50 flex items-center gap-2"
+                className="flex items-center gap-2 px-5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-semibold shadow-lg hover:shadow-xl hover:bg-white/30 transition-all border border-white/30 hover:border-white/50"
                 onClick={() => {
                   if (inputRef.current) inputRef.current.value = city;
                   const form = document.getElementById("search-form");
@@ -311,6 +315,7 @@ export default function MainWeather({ setFullCityName }) {
                       new Event("submit", { cancelable: true, bubbles: true })
                     );
                 }}
+                aria-label={`Sélectionner la ville favorite ${city}`}
               >
                 <svg
                   width="16"
@@ -321,6 +326,8 @@ export default function MainWeather({ setFullCityName }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
                 >
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
@@ -332,20 +339,26 @@ export default function MainWeather({ setFullCityName }) {
         )}
 
         {error && (
-          <div className="text-red-600 font-bold text-xl mb-4">{error}</div>
+          <div
+            className="text-red-600 font-bold text-xl mb-4"
+            role="alert"
+            aria-live="assertive"
+          >
+            {error}
+          </div>
         )}
 
         <section className="relative flex flex-col items-center w-full max-w-6xl">
           <Image
             src={backgroundImage}
-            alt="Image météo"
+            alt="Image représentant la météo"
             width={1920}
             height={1080}
-            className="img-back w-[90%] h-[70vh] object-cover rounded-2xl"
+            className="w-[90%] h-[70vh] object-cover rounded-2xl"
             priority
           />
 
-          <div className="absolute top-[4%] left-1/2 transform -translate-x-1/2 text-center text-white font-bold text-2xl drop-shadow-md city">
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-white font-bold text-2xl drop-shadow-md city">
             <h3>{cityName}</h3>
             <p>{cityDesc}</p>
           </div>
@@ -353,14 +366,14 @@ export default function MainWeather({ setFullCityName }) {
           <div className="absolute bottom-[47%] left-1/2 transform -translate-x-1/2 w-1/2 bg-white/10 backdrop-blur-md p-5 rounded-xl text-white text-center shadow-xl hover:scale-[1.02] transition-all forecast">
             {weatherIcon && (
               <Image
-                alt="Icone météo"
+                alt="Icône météo"
                 src={weatherIcon}
                 width={100}
                 height={100}
                 className="mx-auto"
               />
             )}
-            <p className="tempartures1 text-3xl font-bold mt-2">{temp1}</p>
+            <p className="text-3xl font-bold mt-2">{temp1}</p>
             <p className="mt-1">{temp2}</p>
             <div className="flex justify-around mt-4 text-sm">
               <p>Ressentie: {stats[0]}</p>
