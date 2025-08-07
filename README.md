@@ -1,4 +1,4 @@
-Météo ECF
+Weathora
 Ce projet est une application web de météo permettant de :
 
 Rechercher la météo d'une ville en temps réel
