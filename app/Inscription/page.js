@@ -11,12 +11,15 @@ export default function Inscription() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
+  const [pseudo, setPseudo] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSuccess("");
 
     if (password !== confirmPassword) {
       setError("Les mots de passe ne correspondent pas");
@@ -25,18 +28,47 @@ export default function Inscription() {
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (error) {
         setError(error.message);
-      } else {
-        setError("Votre compte a bien été créé ! Vous pouvez vous connecter.");
+        setLoading(false);
+        return;
+      }
+
+      const user = data.user;
+
+      if (user) {
+        // Insertion manuelle dans la table `profiles`
+        const { error: profileError } = await supabase.from("profiles").insert([
+          {
+            id: user.id,
+            pseudo: pseudo,
+            is_premium: false,
+          },
+        ]);
+
+        if (profileError) {
+          console.error(
+            "Erreur lors de la création du profil :",
+            profileError.message
+          );
+          setError("Erreur lors de la création du profil.");
+        } else {
+          setSuccess(
+            "Votre compte a bien été créé ! Vous pouvez vous connecter."
+          );
+          // Redirection après 2 secondes
+          setTimeout(() => {
+            router.push("/Connexion");
+          }, 2000);
+        }
       }
     } catch (err) {
-      setError("Erreur lors de l'inscription");
+      setError("Erreur lors de l'inscription.");
     }
     setLoading(false);
   };
@@ -92,7 +124,40 @@ export default function Inscription() {
               </div>
             )}
 
+            {success && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-2xl backdrop-blur-sm">
+                <div className="flex items-center justify-center text-green-300 font-semibold">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM16.707 7.293a1 1 0 00-1.414-1.414L9 12.172 6.707 9.879a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l7-7z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {success}
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-blue-200 mb-3">
+                  Pseudo
+                </label>
+                <input
+                  type="text"
+                  value={pseudo}
+                  onChange={(e) => setPseudo(e.target.value)}
+                  placeholder="Votre pseudo"
+                  className="w-full px-6 py-4 bg-white/20 border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent text-white placeholder-blue-300 transition-all duration-300 text-lg"
+                  required
+                />
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-blue-200 mb-3">
                   Email

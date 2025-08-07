@@ -48,18 +48,51 @@ export default function Profil() {
     setMessage("");
 
     try {
-      const { error } = await supabase.auth.updateUser({
+      // Récupérer user avec la méthode async getUser()
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setError("Utilisateur non connecté ou erreur récupération utilisateur");
+        setLoading(false);
+        return;
+      }
+
+      console.log("Current user:", user);
+
+      const { error: authError } = await supabase.auth.updateUser({
         data: { full_name: name },
       });
 
-      if (error) {
-        setError("Erreur lors de la modification du nom : " + error.message);
+      if (authError) {
+        setError(
+          "Erreur lors de la modification du pseudo dans auth : " +
+            authError.message
+        );
+        setLoading(false);
+        return;
+      }
+
+      const { error: dbError } = await supabase
+        .from("profiles")
+        .update({ pseudo: name })
+        .eq("id", user.id); // Utilisez user.id
+
+      if (dbError) {
+        console.error(dbError); // Ajoutez ceci pour voir l’erreur complète
+        setError(
+          "Erreur lors de la modification du pseudo dans profiles : " +
+            dbError.message
+        );
       } else {
-        setMessage("Nom modifié avec succès");
+        setMessage("Pseudo modifié avec succès");
       }
     } catch (err) {
-      setError("Erreur lors de la modification du nom");
+      setError("Erreur lors de la modification du pseudo");
     }
+
     setLoading(false);
   };
 
@@ -127,7 +160,6 @@ export default function Profil() {
     setMessage("");
 
     try {
-      // Récupérer la session actuelle pour obtenir le token
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -137,7 +169,6 @@ export default function Profil() {
         return;
       }
 
-      // Appeler l'API route pour supprimer le compte côté serveur
       const response = await fetch("/api/delete-user", {
         method: "DELETE",
         headers: {
@@ -154,15 +185,19 @@ export default function Profil() {
         );
       } else {
         setMessage("Données supprimées avec succès");
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
+
+        // 🔐 Déconnecter l'utilisateur
+        await supabase.auth.signOut();
+
+        // 🔄 Rediriger après déconnexion
+        router.push("/");
       }
     } catch (err) {
       setError("Erreur lors de la suppression");
+    } finally {
+      setLoading(false);
+      setShowDeleteModal(false);
     }
-    setLoading(false);
-    setShowDeleteModal(false);
   };
 
   if (loading) {

@@ -1,37 +1,57 @@
-// app/api/delete-user/route.js
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase/client";
 
 export async function DELETE(request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
+    
+    const authHeader = request.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { error: "Token d'authentification manquant" },
+        { status: 401 }
+      );
+    }
 
-    // Récupérer l'utilisateur actuel
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
+    const token = authHeader.replace("Bearer ", "");
+    
 
-    if (userError || !user) {
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
+    const { data: userData, error: userError } = await supabaseAdmin.auth.getUser(token);
+    if (userError || !userData.user) {
       return NextResponse.json(
         { error: "Utilisateur non authentifié" },
         { status: 401 }
       );
     }
 
-    // Supprimer les favoris de l'utilisateur
-    const { error: favError } = await supabase
-      .from("favorites")
-      .delete()
-      .eq("profiles_id", user.id);
+    const userId = userData.user.id;
 
-    if (favError) {
-      console.error("Erreur lors de la suppression des favoris:", favError);
+    const { error: deleteUserError } =
+      await supabaseAdmin.auth.admin.deleteUser(userId);
+
+      
+
+    if (deleteUserError) {
+      console.error(
+        "Erreur lors de la suppression de l'utilisateur:",
+        deleteUserError
+      );
+      return NextResponse.json(
+        { error: "Erreur lors de la suppression de l'utilisateur" },
+        { status: 500 }
+      );
     }
 
-    // Déconnecter l'utilisateur
+    console.log("Utilisateur supprimé avec succès");
+
     const { error: signOutError } = await supabase.auth.signOut();
+
+    
 
     if (signOutError) {
       console.error("Erreur lors de la déconnexion:", signOutError);
