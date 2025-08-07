@@ -255,9 +255,8 @@ export default function MainWeather({ setFullCityName }) {
       data: { session },
     } = await supabase.auth.getSession();
     console.log(session.user.id);
-    
 
-      // Ajoute la ville aux favoris
+    // Ajoute la ville aux favoris
     const { error: insertError } = await supabase.from("favorites").insert({
       profiles_id: session.user.id,
       city_name: city,
@@ -306,7 +305,7 @@ export default function MainWeather({ setFullCityName }) {
           <div
             id="suggestions-container"
             ref={suggestionsRef}
-            className="absolute z-50 top-full left-0 w-[90%] sm:w-[100%] max-h-[200px] overflow-y-auto bg-black/95 backdrop-blur-xl border border-cyan-400/50 shadow-xl shadow-cyan-400/30 text-white mt-3"
+            className="absolute z-50 top-full left-0 right-0 sm:right-auto sm:w-full max-h-[200px] overflow-y-auto bg-black/95 backdrop-blur-xl border border-cyan-400/50 shadow-xl shadow-cyan-400/30 text-white mt-3 rounded-md"
           ></div>
 
           <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto">
@@ -383,7 +382,7 @@ export default function MainWeather({ setFullCityName }) {
           <div className="relative w-[90%] h-[70vh] overflow-hidden shadow-2xl shadow-cyan-400/20 border-2 border-cyan-400/30 rounded-2xl">
             <Image
               src={backgroundImage}
-              alt="Image météo"
+              alt=""
               width={1920}
               height={1080}
               className="img-back w-full h-full object-cover rounded-2xl"

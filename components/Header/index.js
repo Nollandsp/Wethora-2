@@ -61,11 +61,6 @@ export default function Header() {
           </div>
         </a>
 
-        <h2 className="text-4xl font-bold mt-4 mb-4 font-mono tracking-widest drop-shadow-2xl">
-          <span className="text-cyan-400">&gt;</span> WEATHORA{" "}
-          <span className="text-cyan-400">&lt;</span>
-        </h2>
-
         <h4 className="text-base max-w-xl font-mono tracking-wide text-cyan-300/90 opacity-90 leading-relaxed drop-shadow-lg">
           [SYSTEM_INITIALIZED] Votre météo de confiance, interface futuriste
           pour illuminer vos journées et vous guider en douceur, qu'il pleuve ou
@@ -78,7 +73,7 @@ export default function Header() {
           type="button"
         >
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/50 to-transparent animate-pulse"></div>
-          &gt; SCAN_WEATHER.EXE
+          &gt; DÉCOUVRIR LA MÉTÉO
         </button>
 
         {/* Indicateurs de statut */}

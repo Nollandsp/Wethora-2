@@ -99,12 +99,12 @@ export default function Navbar() {
 
       {/* Menu mobile */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2 text-center bg-white/10 backdrop-blur-md">
+        <div className="md:hidden flex flex-col items-center px-6 py-6 space-y-4 text-center bg-white/10 backdrop-blur-md">
           {!user && (
             <Link
               href="/Connexion"
               onClick={() => setIsOpen(false)}
-              className={linkClass}
+              className={linkClass + " w-full"}
             >
               Connexion
             </Link>
@@ -112,21 +112,21 @@ export default function Navbar() {
           <Link
             href="/Inscription"
             onClick={() => setIsOpen(false)}
-            className={linkClass}
+            className={linkClass + " w-full"}
           >
             Inscription
           </Link>
           <Link
             href="/Favoris"
             onClick={() => setIsOpen(false)}
-            className={linkClass}
+            className={linkClass + " w-full"}
           >
             Favoris
           </Link>
           <Link
             href="/premium"
             onClick={() => setIsOpen(false)}
-            className={linkClass}
+            className={linkClass + " w-full"}
           >
             Premium
           </Link>
@@ -134,7 +134,7 @@ export default function Navbar() {
             <Link
               href="/profil"
               onClick={() => setIsOpen(false)}
-              className={linkClass}
+              className={linkClass + " w-full"}
             >
               Profil
             </Link>
@@ -145,13 +145,14 @@ export default function Navbar() {
                 setIsOpen(false);
                 handleLogout();
               }}
-              className="text-white text-base font-medium hover:text-red-400 transition duration-200 border border-red-400 rounded px-3 py-1 w-full"
+              className="text-white text-base font-medium hover:text-red-400 transition duration-200 border border-red-400 rounded px-4 py-2 w-full"
             >
               Déconnexion
             </button>
           )}
         </div>
       )}
+
       {logoutMsg && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
           {logoutMsg}

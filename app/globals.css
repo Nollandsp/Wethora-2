@@ -81,3 +81,13 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+#suggestions-container > * {
+  color: #a0f0f0; /* couleur claire par défaut */
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+#suggestions-container > *:hover {
+  color: black !important; /* texte noir uniquement sur l’élément survolé */
+}
