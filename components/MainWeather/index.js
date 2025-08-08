@@ -278,7 +278,6 @@ export default function MainWeather({ setFullCityName }) {
 
   return (
     <>
-      <Navbar />
       <main className="flex flex-col items-center justify-center w-full px-4 min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
         {/* Effets de fond futuristes */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
@@ -378,7 +377,7 @@ export default function MainWeather({ setFullCityName }) {
           </div>
         )}
 
-        <section className="relative flex flex-col items-center w-full max-w-6xl">
+        <section className="relative flex flex-col items-center w-full max-w-6xl mb-8">
           <div className="relative w-[90%] h-[70vh] overflow-hidden shadow-2xl shadow-cyan-400/20 border-2 border-cyan-400/30 rounded-2xl">
             <Image
               src={backgroundImage}
@@ -401,12 +400,12 @@ export default function MainWeather({ setFullCityName }) {
 
             <div
               className="absolute left-1/2 transform -translate-x-1/2 text-center text-cyan-100 font-bold text-2xl drop-shadow-2xl city
-                top-[2%] sm:top-[4%]"
+                top-[2%] sm:top-[4%] w-[90%] px-4"
             >
-              <h3 className="font-mono tracking-widest text-3xl">
+              <h3 className="font-mono tracking-widest text-xl sm:text-3xl break-words">
                 &gt; {cityName ? cityName.toUpperCase() : ""}
               </h3>
-              <p className="font-mono tracking-wide text-lg text-cyan-300 opacity-90">
+              <p className="font-mono tracking-wide text-sm sm:text-lg text-cyan-300 opacity-90 break-words">
                 [{cityDesc}]
               </p>
             </div>
@@ -415,7 +414,7 @@ export default function MainWeather({ setFullCityName }) {
               className="absolute bottom-[80%] left-1/2 transform -translate-x-1/2 w-1/2 sm:w-1/2 w-[90%] sm:left-1/2 sm:-translate-x-1/2 left-1/2 -translate-x-1/2
              bg-black/80 backdrop-blur-xl border-2 border-cyan-400/50 p-5 rounded-xl text-cyan-100 text-center shadow-2xl
              hover:scale-[1.02] transition-all forecast relative overflow-hidden
-             sm:bottom-[80%] bottom-[10%]"
+             sm:bottom-[80%] bottom-[2%]"
             >
               {/* Indicateurs de scan */}
               <div className="absolute top-2 left-4 flex gap-2">

@@ -4,6 +4,7 @@ import { useState } from "react";
 import MainWeather from "@/components/MainWeather";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const [fullCityName, setFullCityName] = useState("");
@@ -18,6 +19,7 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
+        <Navbar />
         <Header />
         <MainWeather setFullCityName={setFullCityName} />
         <Footer />

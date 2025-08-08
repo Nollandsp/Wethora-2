@@ -25,7 +25,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@keyframes gradientMove {
+/* @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
   }
@@ -81,7 +81,6 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
-
 #suggestions-container > * {
   color: #a0f0f0; /* couleur claire par défaut */
   transition: color 0.2s ease;
