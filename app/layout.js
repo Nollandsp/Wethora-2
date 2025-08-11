@@ -2,7 +2,6 @@ import "./globals.css";
 import Head from "next/head";
 import "leaflet/dist/leaflet.css";
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
