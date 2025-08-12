@@ -278,232 +278,266 @@ export default function MainWeather({ setFullCityName }) {
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center w-full px-4 min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
-        {/* Effets de fond futuristes */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <main className="flex flex-col items-center justify-center w-full px-4 min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+        {/* Effets de fond artistiques */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-400/20 via-transparent to-transparent"></div>
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent"></div>
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-violet-500/10 rounded-full blur-3xl animate-pulse"></div>
 
         <div
           id="decouvrir"
           style={{ height: "64px", marginTop: "-64px" }}
           aria-hidden="true"
         />
-        <form
-          id="search-form"
-          onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row justify-center w-full max-w-full sm:max-w-md lg:max-w-lg gap-2 sm:gap-2 mb-8 mt-10 px-2 relative"
-        >
-          <input
-            type="search"
-            ref={inputRef}
-            placeholder="Rechercher une ville..."
-            className="w-full sm:flex-1 px-4 py-1 sm:px-5 sm:py-1 text-base border-2 border-cyan-400/50 bg-black/80 backdrop-blur-sm text-cyan-100 placeholder-cyan-300/60 font-mono tracking-wide focus:outline-none focus:ring-2 focus:ring-cyan-400 hover:border-cyan-300 transition-all shadow-lg shadow-cyan-400/20"
-            autoComplete="off"
-          />
-          <div
-            id="suggestions-container"
-            ref={suggestionsRef}
-            className="absolute z-50 top-full left-0 right-0 sm:right-auto sm:w-full max-h-[200px] overflow-y-auto bg-black/95 backdrop-blur-xl border border-cyan-400/50 shadow-xl shadow-cyan-400/30 text-white mt-3 rounded-md"
-          ></div>
 
-          <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto">
-            <button
-              type="submit"
-              className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-bold text-black uppercase bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 shadow-lg shadow-cyan-400/30 transition-all transform hover:scale-105 font-mono tracking-wider"
-            >
-              &gt; SCAN
-            </button>
+        {/* Conteneur principal avec layout en grid */}
+        <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
+          {/* Panel de gauche - Recherche et contrôles */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Formulaire de recherche vertical */}
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-2xl">
+              <h2 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                Recherche météo
+              </h2>
 
-            {user ? (
-              <button
-                type="button"
-                className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-bold text-black uppercase bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-300 hover:to-purple-400 shadow-lg shadow-purple-400/30 transition-all transform hover:scale-105 font-mono tracking-wider"
-                onClick={handleAddFavorite}
+              <form
+                id="search-form"
+                onSubmit={handleSubmit}
+                className="space-y-4 relative"
               >
-                + SAVE
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2 text-sm font-bold text-gray-500 uppercase bg-gray-800 cursor-not-allowed shadow-md font-mono tracking-wider"
-                disabled
-                title="Connectez-vous pour ajouter aux favoris"
-              >
-                + LOCKED
-              </button>
+                <div className="relative">
+                  <input
+                    type="search"
+                    ref={inputRef}
+                    placeholder="Entrez une ville..."
+                    className="w-full px-4 py-4 bg-black/30 border border-white/30 text-white placeholder-white/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
+                    autoComplete="off"
+                  />
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    <svg
+                      className="w-5 h-5 text-white/60"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  id="suggestions-container"
+                  ref={suggestionsRef}
+                  className="absolute z-50 top-full left-0 right-0 max-h-[200px] overflow-y-auto bg-black/90 backdrop-blur-xl border border-white/30 shadow-xl text-white mt-2 rounded-xl"
+                ></div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="submit"
+                    className="px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-purple-500/25 transition-all transform hover:scale-105"
+                  >
+                    Chercher
+                  </button>
+
+                  {user ? (
+                    <button
+                      type="button"
+                      className="px-4 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-emerald-500/25 transition-all transform hover:scale-105"
+                      onClick={handleAddFavorite}
+                    >
+                      Favoris
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="px-4 py-3 bg-gray-700 text-gray-400 font-semibold rounded-xl cursor-not-allowed"
+                      disabled
+                      title="Connectez-vous pour ajouter aux favoris"
+                    >
+                      🔒 Bloqué
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+
+            {/* Favoris en sidebar */}
+            {user && favorites.length > 0 && (
+              <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-6 shadow-2xl">
+                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Mes favoris
+                </h3>
+
+                <div className="space-y-2">
+                  {favorites.map((city) => (
+                    <button
+                      key={city}
+                      className="w-full text-left px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all transform hover:scale-105 flex items-center gap-3"
+                      onClick={() => {
+                        if (inputRef.current) inputRef.current.value = city;
+                        const form = document.getElementById("search-form");
+                        if (form)
+                          form.dispatchEvent(
+                            new Event("submit", {
+                              cancelable: true,
+                              bubbles: true,
+                            })
+                          );
+                      }}
+                    >
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      {city}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Message d'erreur */}
+            {error && (
+              <div className="bg-red-500/20 border border-red-400/30 text-red-200 p-4 rounded-xl backdrop-blur-lg">
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <Path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {error}
+                </div>
+              </div>
             )}
           </div>
-        </form>
 
-        {user && favorites.length > 0 && (
-          <div className="flex flex-wrap gap-3 mb-6 justify-center">
-            {favorites.map((city) => (
-              <button
-                key={city}
-                className="px-5 py-1 bg-black/70 backdrop-blur-sm border border-cyan-400/60 text-cyan-100 font-bold shadow-lg hover:shadow-cyan-400/40 hover:bg-black/90 transition-all hover:border-cyan-300 transform hover:scale-110 flex items-center gap-2 font-mono tracking-wide hover:text-cyan-200"
-                onClick={() => {
-                  if (inputRef.current) inputRef.current.value = city;
-                  const form = document.getElementById("search-form");
-                  if (form)
-                    form.dispatchEvent(
-                      new Event("submit", { cancelable: true, bubbles: true })
-                    );
-                }}
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  viewBox="0 0 24 24"
-                  className="animate-pulse"
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                &gt; {city.toUpperCase()}
-              </button>
-            ))}
+          {/* Panel principal - Météo */}
+          <div className="lg:col-span-2">
+            <section className="relative h-[60vh] md:h-[70vh] lg:h-[80vh]">
+              <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+                <Image
+                  src={backgroundImage}
+                  alt=""
+                  width={1920}
+                  height={1080}
+                  className="img-back w-full h-full object-cover"
+                  priority
+                />
+
+                {/* Overlay gradient moderne */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-blue-900/30"></div>
+
+                {/* Header de la ville */}
+                <div className="absolute top-6 left-4 right-4 md:top-8 md:left-8 md:right-8">
+                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 md:p-6 text-white">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2 break-words">
+                      {cityName ? cityName : "Aucune ville sélectionnée"}
+                    </h3>
+                    <p className="text-white/80 text-base md:text-lg break-words">
+                      {cityDesc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Widget météo repositionné */}
+                <div className="absolute bottom-6 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
+                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 text-white shadow-2xl">
+                    {/* Météo principale en flexbox */}
+                    <div className="flex items-center justify-between mb-4 md:mb-8">
+                      <div className="flex items-center gap-2 md:gap-6">
+                        {weatherIcon && (
+                          <div className="bg-white/20 p-1.5 md:p-4 rounded-2xl">
+                            <Image
+                              alt="Icone météo"
+                              src={weatherIcon}
+                              width={40}
+                              height={40}
+                              className="drop-shadow-lg md:w-[80px] md:h-[80px]"
+                            />
+                          </div>
+                        )}
+
+                        <div>
+                          <p className="text-2xl md:text-5xl font-bold mb-0.5 md:mb-2">
+                            {temp1}
+                          </p>
+                          <p className="text-sm md:text-xl text-white/80">
+                            {temp2}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats en grid horizontal */}
+                    <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                        <div className="w-2 h-2 bg-orange-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                          Ressenti
+                        </p>
+                        <p className="font-bold text-base md:text-xl">
+                          {stats[0]}
+                        </p>
+                      </div>
+
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                          Vent
+                        </p>
+                        <p className="font-bold text-base md:text-xl">
+                          {stats[1]}
+                        </p>
+                      </div>
+
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                        <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                          Humidité
+                        </p>
+                        <p className="font-bold text-base md:text-xl">
+                          {stats[2]}
+                        </p>
+                      </div>
+
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                        <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                          Pression
+                        </p>
+                        <p className="font-bold text-base md:text-xl">
+                          {stats[3]}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        )}
-
-        {error && (
-          <div className="text-red-400 font-bold text-xl mb-4 bg-red-900/20 backdrop-blur-sm px-6 py-4 border border-red-400/50 shadow-xl shadow-red-400/20 font-mono tracking-wide">
-            ERROR: {error}
-          </div>
-        )}
-
-        <section className="relative flex flex-col items-center w-full max-w-6xl mb-8">
-          <div className="relative w-[90%] h-[70vh] overflow-hidden shadow-2xl shadow-cyan-400/20 border-2 border-cyan-400/30 rounded-2xl">
-            <Image
-              src={backgroundImage}
-              alt=""
-              width={1920}
-              height={1080}
-              className="img-back w-full h-full object-cover rounded-2xl"
-              priority
-            />
-
-            {/* Overlay cyberpunk */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-cyan-900/20 to-black/30 rounded-2xl"></div>
-
-            {/* Grille futuriste */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent"></div>
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"></div>
-            <div className="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent"></div>
-            <div className="absolute top-0 bottom-0 right-0 w-px bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent"></div>
-
-            <div
-              className="absolute left-1/2 transform -translate-x-1/2 text-center text-cyan-100 font-bold text-2xl drop-shadow-2xl city
-                top-[2%] sm:top-[4%] w-[90%] px-4"
-            >
-              <h3 className="font-mono tracking-widest text-xl sm:text-3xl break-words">
-                &gt; {cityName ? cityName.toUpperCase() : ""}
-              </h3>
-              <p className="font-mono tracking-wide text-sm sm:text-lg text-cyan-300 opacity-90 break-words">
-                [{cityDesc}]
-              </p>
-            </div>
-
-            <div
-              className="absolute bottom-[80%] left-1/2 transform -translate-x-1/2 w-1/2 sm:w-1/2 w-[90%] sm:left-1/2 sm:-translate-x-1/2 left-1/2 -translate-x-1/2
-             bg-black/80 backdrop-blur-xl border-2 border-cyan-400/50 p-5 rounded-xl text-cyan-100 text-center shadow-2xl
-             hover:scale-[1.02] transition-all forecast relative overflow-hidden
-             sm:bottom-[80%] bottom-[2%]"
-            >
-              {/* Indicateurs de scan */}
-              <div className="absolute top-2 left-4 flex gap-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-                <div className="w-2 h-2 bg-purple-400 rounded-full animate-ping delay-300"></div>
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-ping delay-600"></div>
-              </div>
-
-              <div className="absolute top-2 right-4 text-xs font-mono text-cyan-400 tracking-wider">
-                WEATHER.EXE
-              </div>
-
-              {weatherIcon && (
-                <div className="relative mb-4">
-                  <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full"></div>
-                  <Image
-                    alt="Icone météo"
-                    src={weatherIcon}
-                    width={100}
-                    height={100}
-                    className="mx-auto drop-shadow-2xl relative z-10 filter brightness-110"
-                  />
-                </div>
-              )}
-
-              <div className="mb-4">
-                <span className="text-xs font-mono text-cyan-400 tracking-widest block mb-2">
-                  TEMPERATURE
-                </span>
-                <p className="tempartures1 text-3xl font-black mt-2 font-mono tracking-tight">
-                  {temp1}
-                </p>
-              </div>
-
-              <p className="mt-1 mb-6 font-mono text-cyan-300 tracking-wide">
-                {temp2}
-              </p>
-
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 text-sm">
-                <div className="bg-black/60 backdrop-blur-sm p-3 border border-cyan-400/30 hover:border-cyan-400/60 transition-all relative overflow-hidden rounded">
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent animate-pulse"></div>
-                  <p className="text-cyan-400 text-xs uppercase font-mono mb-1 tracking-widest">
-                    FEELS
-                  </p>
-                  <p className="font-bold text-cyan-100 font-mono">
-                    {stats[0]}
-                  </p>
-                </div>
-
-                <div className="bg-black/60 backdrop-blur-sm p-3 border border-purple-400/30 hover:border-purple-400/60 transition-all relative overflow-hidden rounded">
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent animate-pulse delay-200"></div>
-                  <p className="text-purple-400 text-xs uppercase font-mono mb-1 tracking-widest">
-                    WIND
-                  </p>
-                  <p className="font-bold text-cyan-100 font-mono">
-                    {stats[1]}
-                  </p>
-                </div>
-
-                <div className="bg-black/60 backdrop-blur-sm p-3 border border-green-400/30 hover:border-green-400/60 transition-all relative overflow-hidden rounded">
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent animate-pulse delay-400"></div>
-                  <p className="text-green-400 text-xs uppercase font-mono mb-1 tracking-widest">
-                    HUMID
-                  </p>
-                  <p className="font-bold text-cyan-100 font-mono">
-                    {stats[2]}
-                  </p>
-                </div>
-
-                <div className="bg-black/60 backdrop-blur-sm p-3 border border-yellow-400/30 hover:border-yellow-400/60 transition-all relative overflow-hidden rounded">
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent animate-pulse delay-600"></div>
-                  <p className="text-yellow-400 text-xs uppercase font-mono mb-1 tracking-widest">
-                    PRESS
-                  </p>
-                  <p className="font-bold text-cyan-100 font-mono">
-                    {stats[3]}
-                  </p>
-                </div>
-              </div>
-
-              {/* Barre de progression factice */}
-              <div className="mt-4 flex justify-center">
-                <div className="w-32 h-1 bg-black/50 overflow-hidden rounded">
-                  <div className="h-full bg-gradient-to-r from-cyan-400 to-purple-400 animate-pulse"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </main>
     </>
   );

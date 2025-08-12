@@ -1,25 +1,17 @@
 export default function Footer() {
   return (
-    <footer className="w-full px-5 py-[30px] bg-black/80 backdrop-blur-xl border-t-2 border-cyan-400/30 text-cyan-100 text-center text-[0.95rem] shadow-2xl shadow-cyan-400/10 relative overflow-hidden">
-      {/* Effets de fond futuristes */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent"></div>
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent animate-pulse"></div>
+    <footer className="w-full px-6 py-6 bg-white/10 backdrop-blur-lg border-t border-white/20 text-white text-center text-sm shadow-2xl shadow-black/20 relative overflow-hidden ">
+      {/* Effets de fond subtils */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-700/10 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent animate-pulse"></div>
 
       <div className="relative z-10">
-        <p className="my-2 opacity-90 leading-[1.5] font-mono tracking-wide">
-          <span className="text-cyan-400">&gt;</span> © 2025 WEATHORA.EXE{" "}
-          <span className="text-cyan-400">&lt;</span>
+        <p className="my-1 opacity-90 leading-relaxed font-semibold tracking-wide font-sans">
+          <span className="text-green-400"></span> © 2025 WEATHORA
         </p>
-        <p className="my-2 opacity-80 leading-[1.5] text-cyan-300/80 font-mono tracking-wider text-sm">
-          [DESIGNED_BY: DA_SILVA_PEREIRA_NOLLAN]
+        <p className="my-1 opacity-70 leading-relaxed tracking-wide font-mono text-xs md:text-sm">
+          CREATION BY DA SILVA PEREIRA NOLLAN
         </p>
-
-        {/* Indicateurs de statut */}
-        <div className="flex justify-center gap-2 mt-4">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping delay-300"></div>
-          <div className="w-2 h-2 bg-purple-400 rounded-full animate-ping delay-600"></div>
-        </div>
       </div>
     </footer>
   );

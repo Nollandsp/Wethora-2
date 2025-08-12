@@ -5,6 +5,7 @@ import MainWeather from "@/components/MainWeather";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import ForecastExtended from "@/components/ForecastExtended";
 
 export default function Home() {
   const [fullCityName, setFullCityName] = useState("");
@@ -22,6 +23,7 @@ export default function Home() {
         <Navbar />
         <Header />
         <MainWeather setFullCityName={setFullCityName} />
+        <ForecastExtended />
         <Footer />
       </div>
     </div>
