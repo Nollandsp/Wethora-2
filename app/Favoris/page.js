@@ -4,7 +4,6 @@ import { supabase } from "@/lib/supabase/client";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
-// Remplace cette constante par ta propre clé si besoin
 const WEATHER_API_KEY = "8eb2d4000ed188a4ae05666fa24891c9";
 
 export default function Favoris() {
@@ -132,10 +131,10 @@ export default function Favoris() {
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent font-mono tracking-widest">
-                &gt; FAVORIS.EXE
+                FAVORIS
               </h1>
               <p className="text-blue-200 text-lg font-mono tracking-wide max-w-md mx-auto">
-                [SYSTÈME DE SURVEILLANCE MÉTÉOROLOGIQUE]
+                SYSTÈME DE SURVEILLANCE MÉTÉOROLOGIQUE
               </p>
 
               {/* Indicateurs de statut */}
@@ -143,14 +142,6 @@ export default function Favoris() {
                 <div className="flex items-center gap-2 text-green-400 font-mono text-sm">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
                   ONLINE
-                </div>
-                <div className="flex items-center gap-2 text-blue-200 font-mono text-sm">
-                  <div className="w-2 h-2 bg-blue-200 rounded-full animate-ping delay-300"></div>
-                  SCANNING
-                </div>
-                <div className="flex items-center gap-2 text-purple-300 font-mono text-sm">
-                  <div className="w-2 h-2 bg-purple-300 rounded-full animate-ping delay-600"></div>
-                  SYNC
                 </div>
               </div>
             </div>
@@ -212,7 +203,7 @@ export default function Favoris() {
 
                       <div className="flex items-center justify-between mb-6 mt-4">
                         <h3 className="text-xl font-bold text-white font-mono tracking-widest">
-                          &gt; {favorite.city_name}
+                          {favorite.city_name}
                         </h3>
                         <button
                           onClick={() => handleDeleteFavorite(favorite.id)}
@@ -277,7 +268,7 @@ export default function Favoris() {
                           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent animate-pulse delay-600"></div>
                           <div className="flex items-center justify-between">
                             <span className="text-cyan-200 font-mono text-sm tracking-widest uppercase">
-                              WIND
+                              VENT
                             </span>
                             <span className="text-white font-bold font-mono">
                               {favorite.wind} km/h
@@ -289,7 +280,7 @@ export default function Favoris() {
                           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-300/50 to-transparent animate-pulse delay-800"></div>
                           <div className="flex items-center justify-between">
                             <span className="text-pink-200 font-mono text-sm tracking-widest uppercase">
-                              PRESSURE
+                              PRESSION
                             </span>
                             <span className="text-white font-bold font-mono">
                               {favorite.pressure} hPa
@@ -314,7 +305,7 @@ export default function Favoris() {
           {/* Footer terminal */}
           <div className="mt-16 text-center">
             <div className="inline-block bg-white/10 backdrop-blur-md px-6 py-2 border border-white/20 rounded-2xl font-mono text-blue-200 tracking-widest text-xs">
-              WEATHORA SYSTEM v2.0.1 // STATUS: OPERATIONAL
+              WEATHORA SYSTEM
             </div>
           </div>
         </div>
