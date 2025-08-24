@@ -43,7 +43,7 @@ export default function Navbar() {
     "text-white text-base font-medium hover:text-blue-200 transition duration-200";
 
   return (
-    <nav className="w-full bg-gray-900/60 backdrop-blur-lg shadow-lg border-b border-gray-800 fixed top-0 z-50">
+    <nav className="w-full bg-gray-900/60 backdrop-blur-lg shadow-lg border-b border-gray-800 fixed top-0 z-[9999]">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">

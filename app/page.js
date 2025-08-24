@@ -21,7 +21,7 @@ export default function Home() {
 
       <div className="relative z-10">
         <Navbar />
-        <Header />
+        {/* <Header /> */}
         <MainWeather setFullCityName={setFullCityName} />
         <ForecastExtended />
         <Footer />

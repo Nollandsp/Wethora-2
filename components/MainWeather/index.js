@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import Navbar from "../Navbar";
+import ForecastExtended from "@/components/ForecastExtended";
 
 export default function MainWeather({ setFullCityName }) {
   const inputRef = useRef(null);
@@ -278,7 +279,11 @@ export default function MainWeather({ setFullCityName }) {
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center w-full px-4 min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      <main
+        className="flex flex-col items-center justify-center w-full px-4 min-h-screen
+  bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden
+  pt-20 sm:pt-24 md:pt-28 lg:pt-16"
+      >
         {/* Effets de fond artistiques */}
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-400/20 via-transparent to-transparent"></div>
         <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent"></div>
@@ -295,7 +300,7 @@ export default function MainWeather({ setFullCityName }) {
           {/* Panel de gauche - Recherche et contrôles */}
           <div className="lg:col-span-1 space-y-6">
             {/* Formulaire de recherche vertical */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-2xl">
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-2xl relative z-50">
               <h2 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 Recherche météo
@@ -434,8 +439,8 @@ export default function MainWeather({ setFullCityName }) {
 
           {/* Panel principal - Météo */}
           <div className="lg:col-span-2">
-            <section className="relative h-[60vh] md:h-[70vh] lg:h-[80vh]">
-              <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+            <section className="relative h-[75vh] md:h-[65vh] lg:h-[80vh]">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
                 <Image
                   src={backgroundImage}
                   alt=""
@@ -445,89 +450,88 @@ export default function MainWeather({ setFullCityName }) {
                   priority
                 />
 
-                {/* Overlay gradient moderne */}
+                {/* Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-blue-900/30"></div>
 
                 {/* Header de la ville */}
-                <div className="absolute top-6 left-4 right-4 md:top-8 md:left-8 md:right-8">
-                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 md:p-6 text-white">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2 break-words">
+                <div className="absolute top-10 left-3 right-3 md:top-6 md:left-6 md:right-6 lg:top-8 lg:left-8 lg:right-8">
+                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-5 lg:p-6 text-white">
+                    <h3 className="text-lg md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 break-words">
                       {cityName ? cityName : "Aucune ville sélectionnée"}
                     </h3>
-                    <p className="text-white/80 text-base md:text-lg break-words">
+                    <p className="text-white/80 text-sm md:text-base lg:text-lg break-words">
                       {cityDesc}
                     </p>
                   </div>
                 </div>
 
-                {/* Widget météo repositionné */}
-                <div className="absolute bottom-6 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
-                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 text-white shadow-2xl">
-                    {/* Météo principale en flexbox */}
-                    <div className="flex items-center justify-between mb-4 md:mb-8">
-                      <div className="flex items-center gap-2 md:gap-6">
+                {/* Widget météo */}
+                <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-6 md:right-6 lg:bottom-8 lg:left-8 lg:right-8">
+                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 text-white shadow-2xl">
+                    {/* Bloc principal */}
+                    <div className="flex items-center justify-between mb-3 md:mb-5 lg:mb-8">
+                      <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
                         {weatherIcon && (
-                          <div className="bg-white/20 p-1.5 md:p-4 rounded-2xl">
+                          <div className="bg-white/20 p-1 md:p-2 lg:p-4 rounded-xl md:rounded-2xl">
                             <Image
                               alt="Icone météo"
                               src={weatherIcon}
-                              width={40}
-                              height={40}
-                              className="drop-shadow-lg md:w-[80px] md:h-[80px]"
+                              width={32}
+                              height={32}
+                              className="drop-shadow-lg md:w-[60px] md:h-[60px] lg:w-[80px] lg:h-[80px]"
                             />
                           </div>
                         )}
-
                         <div>
-                          <p className="text-2xl md:text-5xl font-bold mb-0.5 md:mb-2">
+                          <p className="text-xl md:text-3xl lg:text-5xl font-bold mb-0.5 md:mb-2">
                             {temp1}
                           </p>
-                          <p className="text-sm md:text-xl text-white/80">
+                          <p className="text-xs md:text-base lg:text-xl text-white/80">
                             {temp2}
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Stats en grid horizontal */}
+                    {/* Stats */}
                     <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
                         <div className="w-2 h-2 bg-orange-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
                           Ressenti
                         </p>
-                        <p className="font-bold text-base md:text-xl">
+                        <p className="font-bold text-sm md:text-base lg:text-xl">
                           {stats[0]}
                         </p>
                       </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
                         <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
                           Vent
                         </p>
-                        <p className="font-bold text-base md:text-xl">
+                        <p className="font-bold text-sm md:text-base lg:text-xl">
                           {stats[1]}
                         </p>
                       </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
                         <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
                           Humidité
                         </p>
-                        <p className="font-bold text-base md:text-xl">
+                        <p className="font-bold text-sm md:text-base lg:text-xl">
                           {stats[2]}
                         </p>
                       </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-4 rounded-xl border border-white/20 text-center">
+                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[9px] md:text-sm uppercase font-semibold mb-1">
+                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
                           Pression
                         </p>
-                        <p className="font-bold text-base md:text-xl">
+                        <p className="font-bold text-sm md:text-base lg:text-xl">
                           {stats[3]}
                         </p>
                       </div>
@@ -539,6 +543,7 @@ export default function MainWeather({ setFullCityName }) {
           </div>
         </div>
       </main>
+      <ForecastExtended fullCityName={cityName} />
     </>
   );
 }
