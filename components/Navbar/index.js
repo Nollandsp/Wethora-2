@@ -50,9 +50,9 @@ export default function Navbar() {
           <Image
             src="/Logo-Weathora.png"
             alt="Logo Weathora"
-            width={48}
-            height={32}
-            className="object-contain"
+            width={50}
+            height={50}
+            className="object-contain h-[50px] w-auto"
           />
         </Link>
 

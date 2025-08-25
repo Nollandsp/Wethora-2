@@ -45,7 +45,7 @@ export default function Connexion() {
           <div className="absolute top-40 left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
         </div>
 
-        <div className="relative z-10 min-h-screen flex items-center justify-center pt-20">
+        <div className="relative z-10 min-h-screen flex items-center justify-center pt-32 pb-20">
           <div className="bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-md mx-4 border border-white/20">
             <div className="text-center mb-6">
               <div className="relative inline-block mb-4">

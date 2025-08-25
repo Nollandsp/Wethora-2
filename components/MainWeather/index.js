@@ -443,11 +443,13 @@ export default function MainWeather({ setFullCityName }) {
               <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
                 <Image
                   src={backgroundImage}
-                  alt=""
+                  alt="Background"
                   width={1920}
                   height={1080}
                   className="img-back w-full h-full object-cover"
-                  priority
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/fallback.jpg"; // remplace par fallback si erreur
+                  }}
                 />
 
                 {/* Overlays */}
