@@ -10,7 +10,7 @@ export default function MainWeather({ setFullCityName }) {
   const inputRef = useRef(null);
   const suggestionsRef = useRef(null);
 
-  const [backgroundImage, setBackgroundImage] = useState("/Images/default.jpg");
+  const [backgroundImage, setBackgroundImage] = useState("");
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
@@ -46,7 +46,7 @@ export default function MainWeather({ setFullCityName }) {
         imagePath = "/mist.jpg";
         break;
       default:
-        imagePath = "/default.jpg";
+        imagePath = "";
         break;
     }
     setBackgroundImage(imagePath);
@@ -447,7 +447,7 @@ export default function MainWeather({ setFullCityName }) {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundColor: !backgroundImage ? "#4a148c" : undefined,
+                    backgroundColor: !backgroundImage ? "#4a148c" : undefined, // couleur par défaut si pas d'image
                   }}
                 >
                   {/* Overlay sombre pour lisibilité */}

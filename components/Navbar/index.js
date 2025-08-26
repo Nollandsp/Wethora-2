@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/Logo-Weathora.png"
+            src="/Logo-weathora.png"
             alt="Logo Weathora"
             width={50}
             height={50}
