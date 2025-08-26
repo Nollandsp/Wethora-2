@@ -433,7 +433,7 @@ export default function MainWeather({ setFullCityName }) {
 
           {/* Panel principal - Météo */}
           <div className="lg:col-span-2">
-            <section className="relative h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[80vh]">
+            <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[80vh]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl flex flex-col justify-between">
                 {/* Fond dynamique météo OU violet par défaut */}
                 <div
