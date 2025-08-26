@@ -67,8 +67,8 @@ export default function ForecastExtended({ fullCityName }) {
 
   return (
     <section
-      className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6
-  bg-[#4a148c] border border-white/20 rounded-3xl text-white shadow-2xl my-8"
+      className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6
+  bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl text-white shadow-2xl my-8"
     >
       <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center">
         Prévisions sur 5 jours pour {fullCityName}
@@ -80,12 +80,12 @@ export default function ForecastExtended({ fullCityName }) {
       {error && <p className="text-red-400 text-center mb-4">{error}</p>}
 
       {!loading && !error && forecast.length > 0 && (
-        <div className="flex justify-center gap-6 flex-wrap">
+        <div className="flex justify-center gap-4 sm:gap-6 md:gap-8 flex-wrap">
           {forecast.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-6
-                 w-36 sm:w-32 md:w-36 lg:w-44 flex flex-col items-center shadow-lg"
+              className="bg-[#4a148c] border border-white/30 rounded-2xl p-4 sm:p-6
+            w-32 sm:w-36 md:w-36 lg:w-44 flex flex-col items-center shadow-lg mb-4"
             >
               <p className="font-semibold text-lg md:text-xl capitalize mb-2">
                 {item.day}

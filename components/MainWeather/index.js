@@ -283,8 +283,6 @@ export default function MainWeather({ setFullCityName }) {
         className="flex flex-col items-center justify-center w-full px-4 min-h-screen
   bg-[#4a148c] relative overflow-hidden pt-20 sm:pt-24 md:pt-28 lg:pt-16"
       >
-        {/* NOTE : overlays décoratifs supprimés pour garder une couleur uniforme */}
-
         <div
           id="decouvrir"
           style={{ height: "64px", marginTop: "-64px" }}
@@ -435,7 +433,7 @@ export default function MainWeather({ setFullCityName }) {
 
           {/* Panel principal - Météo */}
           <div className="lg:col-span-2">
-            <section className="relative h-[60vh] sm:h-[55vh] md:h-[60vh] lg:h-[80vh]">
+            <section className="relative h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[80vh]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
                 {/* Fond dynamique météo OU violet par défaut */}
                 <div
@@ -541,9 +539,8 @@ export default function MainWeather({ setFullCityName }) {
             </section>
           </div>
         </div>
+        <ForecastExtended fullCityName={cityName} />
       </main>
-
-      <ForecastExtended fullCityName={cityName} />
     </>
   );
 }
