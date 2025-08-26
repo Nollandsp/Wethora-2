@@ -434,7 +434,7 @@ export default function MainWeather({ setFullCityName }) {
           {/* Panel principal - Météo */}
           <div className="lg:col-span-2">
             <section className="relative h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[80vh]">
-              <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl flex flex-col justify-between">
                 {/* Fond dynamique météo OU violet par défaut */}
                 <div
                   className="absolute inset-0"
@@ -452,86 +452,82 @@ export default function MainWeather({ setFullCityName }) {
                 </div>
 
                 {/* Header de la ville */}
-                <div className="absolute top-4 left-3 right-3 sm:top-5 sm:left-5 sm:right-5 lg:top-8 lg:left-8 lg:right-8">
-                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-white">
-                    <h3 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 break-words">
-                      {cityName ? cityName : "Aucune ville sélectionnée"}
-                    </h3>
-                    <p className="text-white/80 text-xs sm:text-sm md:text-base lg:text-lg break-words">
-                      {cityDesc}
-                    </p>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-white m-3 z-10">
+                  <h3 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 break-words">
+                    {cityName ? cityName : "Aucune ville sélectionnée"}
+                  </h3>
+                  <p className="text-white/80 text-xs sm:text-sm md:text-base lg:text-lg break-words">
+                    {cityDesc}
+                  </p>
                 </div>
 
                 {/* Widget météo */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 lg:bottom-8 lg:left-8 lg:right-8">
-                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-2xl">
-                    {/* Bloc principal */}
-                    <div className="flex items-center justify-between mb-3 md:mb-5 lg:mb-8">
-                      <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-                        {weatherIcon && (
-                          <div className="bg-white/20 p-1 md:p-2 lg:p-4 rounded-xl md:rounded-2xl">
-                            <Image
-                              alt="Icone météo"
-                              src={weatherIcon}
-                              width={32}
-                              height={32}
-                              className="drop-shadow-lg md:w-[60px] md:h-[60px] lg:w-[80px] lg:h-[80px]"
-                            />
-                          </div>
-                        )}
-                        <div>
-                          <p className="text-xl md:text-3xl lg:text-5xl font-bold mb-0.5 md:mb-2">
-                            {temp1}
-                          </p>
-                          <p className="text-xs md:text-base lg:text-xl text-white/80">
-                            {temp2}
-                          </p>
+                <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-2xl m-3 z-10">
+                  {/* Bloc principal */}
+                  <div className="flex items-center justify-between mb-3 md:mb-5 lg:mb-8">
+                    <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
+                      {weatherIcon && (
+                        <div className="bg-white/20 p-1 md:p-2 lg:p-4 rounded-xl md:rounded-2xl">
+                          <Image
+                            alt="Icone météo"
+                            src={weatherIcon}
+                            width={32}
+                            height={32}
+                            className="drop-shadow-lg md:w-[60px] md:h-[60px] lg:w-[80px] lg:h-[80px]"
+                          />
                         </div>
+                      )}
+                      <div>
+                        <p className="text-xl md:text-3xl lg:text-5xl font-bold mb-0.5 md:mb-2">
+                          {temp1}
+                        </p>
+                        <p className="text-xs md:text-base lg:text-xl text-white/80">
+                          {temp2}
+                        </p>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
-                          Ressenti
-                        </p>
-                        <p className="font-bold text-sm md:text-base lg:text-xl">
-                          {stats[0]}
-                        </p>
-                      </div>
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
+                    <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                      <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
+                        Ressenti
+                      </p>
+                      <p className="font-bold text-sm md:text-base lg:text-xl">
+                        {stats[0]}
+                      </p>
+                    </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
-                          Vent
-                        </p>
-                        <p className="font-bold text-sm md:text-base lg:text-xl">
-                          {stats[1]}
-                        </p>
-                      </div>
+                    <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                      <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
+                        Vent
+                      </p>
+                      <p className="font-bold text-sm md:text-base lg:text-xl">
+                        {stats[1]}
+                      </p>
+                    </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
-                          Humidité
-                        </p>
-                        <p className="font-bold text-sm md:text-base lg:text-xl">
-                          {stats[2]}
-                        </p>
-                      </div>
+                    <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
+                      <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                      <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
+                        Humidité
+                      </p>
+                      <p className="font-bold text-sm md:text-base lg:text-xl">
+                        {stats[2]}
+                      </p>
+                    </div>
 
-                      <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
-                        <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1 md:mb-2"></div>
-                        <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
-                          Pression
-                        </p>
-                        <p className="font-bold text-sm md:text-base lg:text-xl">
-                          {stats[3]}
-                        </p>
-                      </div>
+                    <div className="bg-white/10 backdrop-blur-sm p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl border border-white/20 text-center">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1 md:mb-2"></div>
+                      <p className="text-white/60 text-[10px] md:text-xs lg:text-sm uppercase font-semibold mb-1">
+                        Pression
+                      </p>
+                      <p className="font-bold text-sm md:text-base lg:text-xl">
+                        {stats[3]}
+                      </p>
                     </div>
                   </div>
                 </div>
