@@ -421,7 +421,7 @@ export default function MainWeather({ setFullCityName }) {
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
-                    <Path
+                    <path
                       fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                       clipRule="evenodd"
@@ -435,7 +435,7 @@ export default function MainWeather({ setFullCityName }) {
 
           {/* Panel principal - Météo */}
           <div className="lg:col-span-2">
-            <section className="relative h-[75vh] md:h-[65vh] lg:h-[80vh]">
+            <section className="relative h-[60vh] sm:h-[55vh] md:h-[60vh] lg:h-[80vh]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
                 {/* Fond dynamique météo OU violet par défaut */}
                 <div
@@ -447,28 +447,27 @@ export default function MainWeather({ setFullCityName }) {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundColor: !backgroundImage ? "#4a148c" : undefined, // couleur par défaut si pas d'image
+                    backgroundColor: !backgroundImage ? "#4a148c" : undefined,
                   }}
                 >
-                  {/* Overlay sombre pour lisibilité */}
                   <div className="absolute inset-0 bg-black/30" />
                 </div>
 
                 {/* Header de la ville */}
-                <div className="absolute top-10 left-3 right-3 md:top-6 md:left-6 md:right-6 lg:top-8 lg:left-8 lg:right-8">
-                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-5 lg:p-6 text-white">
-                    <h3 className="text-lg md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 break-words">
+                <div className="absolute top-4 left-3 right-3 sm:top-5 sm:left-5 sm:right-5 lg:top-8 lg:left-8 lg:right-8">
+                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-5 text-white">
+                    <h3 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 break-words">
                       {cityName ? cityName : "Aucune ville sélectionnée"}
                     </h3>
-                    <p className="text-white/80 text-sm md:text-base lg:text-lg break-words">
+                    <p className="text-white/80 text-xs sm:text-sm md:text-base lg:text-lg break-words">
                       {cityDesc}
                     </p>
                   </div>
                 </div>
 
                 {/* Widget météo */}
-                <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-6 md:right-6 lg:bottom-8 lg:left-8 lg:right-8">
-                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 text-white shadow-2xl">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 lg:bottom-8 lg:left-8 lg:right-8">
+                  <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-2xl">
                     {/* Bloc principal */}
                     <div className="flex items-center justify-between mb-3 md:mb-5 lg:mb-8">
                       <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
