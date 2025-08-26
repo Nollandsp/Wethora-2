@@ -281,13 +281,9 @@ export default function MainWeather({ setFullCityName }) {
     <>
       <main
         className="flex flex-col items-center justify-center w-full px-4 min-h-screen
-  bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden
-  pt-20 sm:pt-24 md:pt-28 lg:pt-16"
+  bg-[#4a148c] relative overflow-hidden pt-20 sm:pt-24 md:pt-28 lg:pt-16"
       >
-        {/* Effets de fond artistiques */}
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-400/20 via-transparent to-transparent"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent"></div>
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-violet-500/10 rounded-full blur-3xl animate-pulse"></div>
+        {/* NOTE : overlays décoratifs supprimés pour garder une couleur uniforme */}
 
         <div
           id="decouvrir"
@@ -441,20 +437,22 @@ export default function MainWeather({ setFullCityName }) {
           <div className="lg:col-span-2">
             <section className="relative h-[75vh] md:h-[65vh] lg:h-[80vh]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
-                <Image
-                  src={backgroundImage}
-                  alt="Background"
-                  width={1920}
-                  height={1080}
-                  className="img-back w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "/images/fallback.jpg"; // remplace par fallback si erreur
+                {/* Fond dynamique météo OU violet par défaut */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: backgroundImage
+                      ? `url(${backgroundImage})`
+                      : undefined,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: !backgroundImage ? "#4a148c" : undefined,
                   }}
-                />
-
-                {/* Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-blue-900/30"></div>
+                >
+                  {/* Overlay sombre pour lisibilité */}
+                  <div className="absolute inset-0 bg-black/30" />
+                </div>
 
                 {/* Header de la ville */}
                 <div className="absolute top-10 left-3 right-3 md:top-6 md:left-6 md:right-6 lg:top-8 lg:left-8 lg:right-8">
@@ -545,6 +543,7 @@ export default function MainWeather({ setFullCityName }) {
           </div>
         </div>
       </main>
+
       <ForecastExtended fullCityName={cityName} />
     </>
   );
