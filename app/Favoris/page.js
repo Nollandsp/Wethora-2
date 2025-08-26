@@ -166,7 +166,7 @@ export default function Favoris() {
                     href="/"
                     className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 rounded-2xl px-8 py-3 font-bold text-white text-lg transform hover:scale-105 font-mono tracking-wider uppercase shadow-lg hover:shadow-xl"
                   >
-                    &gt; INITIALISER SCAN
+                    AJOUTER UNE VILLE
                   </a>
                 </div>
               </div>
@@ -300,13 +300,6 @@ export default function Favoris() {
                 </div>
               </>
             )}
-          </div>
-
-          {/* Footer terminal */}
-          <div className="mt-16 text-center">
-            <div className="inline-block bg-white/10 backdrop-blur-md px-6 py-2 border border-white/20 rounded-2xl font-mono text-blue-200 tracking-widest text-xs">
-              WEATHORA SYSTEM
-            </div>
           </div>
         </div>
       </div>
