@@ -78,10 +78,10 @@ export default function Profil() {
       const { error: dbError } = await supabase
         .from("profiles")
         .update({ pseudo: name })
-        .eq("id", user.id); // Utilisez user.id
+        .eq("id", user.id);
 
       if (dbError) {
-        console.error(dbError); // Ajoutez ceci pour voir l’erreur complète
+        console.error(dbError);
         setError(
           "Erreur lors de la modification du pseudo dans profiles : " +
             dbError.message
@@ -166,6 +166,7 @@ export default function Profil() {
 
       if (!session) {
         setError("Session non trouvée");
+        setLoading(false);
         return;
       }
 
@@ -178,6 +179,7 @@ export default function Profil() {
       });
 
       const data = await response.json();
+      console.log("delete response:", data);
 
       if (!response.ok) {
         setError(
@@ -186,17 +188,20 @@ export default function Profil() {
       } else {
         setMessage("Données supprimées avec succès");
 
-        // 🔐 Déconnecter l'utilisateur
+        // Déconnecter l'utilisateur côté client
         await supabase.auth.signOut();
 
-        // 🔄 Rediriger après déconnexion
+        // Fermer la modale
+        setShowDeleteModal(false);
+
+        // Rediriger vers la page d'accueil
         router.push("/");
       }
     } catch (err) {
+      console.error("Erreur lors de la suppression:", err);
       setError("Erreur lors de la suppression");
     } finally {
       setLoading(false);
-      setShowDeleteModal(false);
     }
   };
 
@@ -407,10 +412,12 @@ export default function Profil() {
                     </svg>
                     Zone dangereuse
                   </h2>
+
                   <div className="flex flex-col flex-1 justify-between">
                     <p className="text-red-200 text-xs mb-2 lg:text-center lg:text-base lg:mt-12">
                       Supprimez vos données et déconnectez-vous.
                     </p>
+
                     <button
                       onClick={() => setShowDeleteModal(true)}
                       className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 py-1.5 rounded-xl font-bold text-white"
@@ -418,6 +425,69 @@ export default function Profil() {
                       Supprimer mes données
                     </button>
                   </div>
+
+                  {/* 🔒 Modal de confirmation */}
+                  {showDeleteModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
+                      <div className="bg-gradient-to-r from-red-500/20 to-pink-500/20 backdrop-blur-md rounded-2xl p-6 border border-red-500/30 hover:border-red-500/50 shadow-2xl max-w-sm w-full mx-4 flex flex-col justify-between">
+                        <h3 className="text-lg font-bold text-white mb-3 flex items-center justify-center">
+                          <svg
+                            className="w-6 h-6 mr-2 text-red-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                          </svg>
+                          Confirmer la suppression
+                        </h3>
+
+                        <p className="text-red-200 text-sm text-center mb-4">
+                          Cette action est{" "}
+                          <span className="text-red-400 font-semibold">
+                            irréversible
+                          </span>
+                          .
+                          <br />
+                          Toutes vos données et votre compte seront supprimés
+                          définitivement.
+                        </p>
+
+                        {error && (
+                          <p className="text-red-400 text-sm mb-3 text-center">
+                            {error}
+                          </p>
+                        )}
+                        {message && (
+                          <p className="text-green-400 text-sm mb-3 text-center">
+                            {message}
+                          </p>
+                        )}
+
+                        <div className="flex gap-3 justify-end mt-4">
+                          <button
+                            onClick={() => setShowDeleteModal(false)}
+                            disabled={loading}
+                            className="flex-1 bg-gray-700 hover:bg-gray-600 text-white rounded-xl py-2 font-medium"
+                          >
+                            Annuler
+                          </button>
+                          <button
+                            onClick={deleteAccount}
+                            disabled={loading}
+                            className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white rounded-xl py-2 font-bold"
+                          >
+                            {loading ? "Suppression..." : "Supprimer"}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

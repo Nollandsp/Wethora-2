@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { supabase } from "@/lib/supabase/client";
 
 export async function DELETE(request) {
   try {
-    
     const authHeader = request.headers.get("Authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json(
@@ -14,15 +12,17 @@ export async function DELETE(request) {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    
 
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    const { data: userData, error: userError } = await supabaseAdmin.auth.getUser(token);
-    if (userError || !userData.user) {
+    // Récupération des infos utilisateur depuis le token
+    const { data: userData, error: userError } =
+      await supabaseAdmin.auth.getUser(token);
+
+    if (userError || !userData?.user) {
       return NextResponse.json(
         { error: "Utilisateur non authentifié" },
         { status: 401 }
@@ -31,10 +31,9 @@ export async function DELETE(request) {
 
     const userId = userData.user.id;
 
+    // Suppression du compte utilisateur via Supabase Admin
     const { error: deleteUserError } =
       await supabaseAdmin.auth.admin.deleteUser(userId);
-
-      
 
     if (deleteUserError) {
       console.error(
@@ -47,19 +46,10 @@ export async function DELETE(request) {
       );
     }
 
-    console.log("Utilisateur supprimé avec succès");
-
-    const { error: signOutError } = await supabase.auth.signOut();
-
-    
-
-    if (signOutError) {
-      console.error("Erreur lors de la déconnexion:", signOutError);
-    }
-
+    console.log(`✅ Utilisateur ${userId} supprimé avec succès`);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Erreur lors de la suppression:", error);
+    console.error("Erreur interne lors de la suppression:", error);
     return NextResponse.json(
       { error: "Erreur interne du serveur" },
       { status: 500 }
